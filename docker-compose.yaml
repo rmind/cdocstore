@@ -1,10 +1,32 @@
 version: '3'
 
 services:
+  ### dependent services
+
+  database:
+    image: postgres:12.3
+    ports:
+      - "127.0.0.1:8081:9000"
+    environment:
+      POSTGRES_PASSWORD: secret
+
+  storage:
+    image: minio/minio
+    command: server /data
+    volumes:
+      - ./data:/data
+    ports:
+      - "127.0.0.1:8082:9000"
+
+  ### application
+
   app:
     build:
       context: .
       dockerfile: conf/app.Dockerfile
+    depends_on:
+      - database
+      - storage
     image: cdocstore
     ports:
       - "127.0.0.1:8080:8000"
