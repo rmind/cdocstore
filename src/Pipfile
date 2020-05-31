@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+flake8 = "*"
+pytest-flake8 = "*"
+pytest-cov = "*"
+
+[packages]
+flask = "~=1.1"
+flask-restplus = "~=0.13"
+werkzeug = "~=0.16"
+requests = "~=2.23"
+gunicorn = "~=20.0"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+cdocstore = "/app/run.sh"
+tests = "pytest"
